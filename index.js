@@ -12,7 +12,7 @@ const app = express();
 app.use(cors());
 
 mongoose
-	.connect("mongodb+srv://admin:123@cluster0.7frlqog.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+	.connect("process.env.MONGO_URL")
 	.then(() => {
 		console.log("Connected to the database");
 	})
