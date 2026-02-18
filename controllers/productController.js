@@ -22,10 +22,10 @@ export async function createProduct(req, res) {
 			message: "Product saved successfully",
 		});
 	} catch (err) {
-		console.log(err);
+		console.log("FULL ERROR:", err)
 		res.status(500).json({
 			message: "Product not saved",
-		});
+		})
 	}
 }
 
@@ -126,15 +126,15 @@ export async function searchProduct(req, res) {
 				{ name: { $regex: search, $options: "i" } },
 				{ altNames: { $elemMatch: { $regex: search, $options: "i" } } },
 			],
-		});
+		})
 		res.json({
 			products: products,
-		});
+		})
 	} catch (err) {
 		res.status(500).json({
-			message: "Error in searching product",
-		});
-		return;
+			message: "Error in searching product"
+		})
+		
 	}
 }
 
