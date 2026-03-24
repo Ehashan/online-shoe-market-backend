@@ -53,7 +53,7 @@ export async function getProductById(req, res) {
 		product: product
 	})
 }
-///
+
 
 export function deleteProduct(req, res) {
 	if (req.user == null) {
