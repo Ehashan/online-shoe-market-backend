@@ -172,10 +172,11 @@ export async function googleLogin(req,res){
 			});
 		}
 	}catch(e){
+		console.log("GOOGLE ERROR:", e.response?.data || e.message);
 		res.status(500).json({
 			message : "Google login failed"
 		})
-	}
+}
 
 }
 
@@ -195,7 +196,7 @@ export function sendOTP(req,res){
 	const otp = Math.floor(Math.random()*9000) + 1000;
 
 	const message = {
-		from : "malithdilshan27@gmail.com",
+		from : "ehashan957@gmail.com",
 		to : email,
 		subject : "OTP for email verification",
 		text : "Your OTP is : "+otp
@@ -230,7 +231,7 @@ export async function changePassword(req,res){
 	const password = req.body.password;
 	const otp = req.body.otp;
 	try{
-		//get latest otp from db
+		
 		const lastOTPData = await OTP.findOne({
 			email : email
 		}).sort({createdAt : -1})
