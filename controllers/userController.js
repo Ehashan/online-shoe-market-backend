@@ -13,9 +13,9 @@ const transport = nodemailer.createTransport({
 	port : 587,
 	secure: false,
 	auth: {
-		user: "erandahashan123@gmail.com",
-		pass: "qqnajdiqabfpavwj",
-	},
+			user: process.env.EMAIL_USER,
+			pass: process.env.EMAIL_PASS,
+},
 })
 
 export function saveUser(req, res) {
@@ -45,6 +45,9 @@ export function saveUser(req, res) {
 	});
 
 
+
+
+
 	user
 		.save()
 		.then(() => {
@@ -72,7 +75,8 @@ export function loginUser(req, res) {
 			});
 		} else {
 			const isPasswordCorrect = bcrypt.compareSync(password, user.password);
-	
+			
+			
 			if (isPasswordCorrect) {
 				
 				const userData = {
@@ -172,11 +176,10 @@ export async function googleLogin(req,res){
 			});
 		}
 	}catch(e){
-		console.log("GOOGLE ERROR:", e.response?.data || e.message);
 		res.status(500).json({
 			message : "Google login failed"
 		})
-}
+	}
 
 }
 
